@@ -2,19 +2,25 @@
 
 int main()
 {
-    // Création de la fenêtre
-    sf::RenderWindow window({800, 600}, "Tower Defence");
+    // Create window
+    sf::RenderWindow window({640, 360}, "Tower Defence");
 
-    // Chargement de la texture de fond
+    // Change the background default with the background image
     sf::Texture backgroundTexture;
-    if (!backgroundTexture.loadFromFile("images/terrain.png")) {
+    if (!backgroundTexture.loadFromFile("images/background.png")) {
         return -1;
     }
 
-    // Création d'un sprite pour afficher l'image
+    // Define background sprite
     sf::Sprite backgroundSprite(backgroundTexture);
 
-    // Boucle principale
+    // Background image size
+    float scaleX = 1.0f; // x
+    float scaleY = 1.0f; // y
+
+    backgroundSprite.setScale(scaleX, scaleY);
+
+    // Main loop
     while (window.isOpen())
     {
         sf::Event event;
