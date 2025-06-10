@@ -12,7 +12,25 @@ int main() {
         return EXIT_FAILURE;
     }
 
-    // Ajoute la police au constructeur du menu
+    sf::Texture backgroundTexture;
+    if (!backgroundTexture.loadFromFile("asset/background_menu.jpg")) {
+        std::cerr << "Erreur chargement background\n";
+        return EXIT_FAILURE;
+    }
+
+    sf::Sprite backgroundSprite(backgroundTexture);
+
+
+    sf::Vector2u textureSize = backgroundTexture.getSize();
+    sf::Vector2u windowSize = fenetre.getSize();
+
+    sf::Vector2f scale(
+        static_cast<float>(windowSize.x) / textureSize.x,
+        static_cast<float>(windowSize.y) / textureSize.y
+    );
+
+    backgroundSprite.setScale(scale);
+
     Menu menu(fenetre.getSize().x, fenetre.getSize().y, police);
 
     while (fenetre.isOpen()) {
@@ -38,7 +56,8 @@ int main() {
         }
 
         fenetre.clear();
-        menu.dessiner(fenetre);
+        fenetre.draw(backgroundSprite); // Fond
+        menu.dessiner(fenetre);         // Menu par-dessus
         fenetre.display();
     }
 
