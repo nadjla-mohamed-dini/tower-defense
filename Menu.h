@@ -18,7 +18,7 @@ public:
 private:
     int indexSelectionne;
     sf::Text elementsMenu[MAX_ITEM];
-    //RoundedRectangleShape rectanglesMenu[MAX_ITEM];
+    RoundedRectangleShape fondMenu[MAX_ITEM];
 };
 
 #endif // MENU_H
