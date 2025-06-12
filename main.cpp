@@ -7,7 +7,7 @@ int main()
 
     // Change the background default with the background image
     sf::Texture backgroundTexture;
-    if (!backgroundTexture.loadFromFile("images/background.png")) {
+    if (!backgroundTexture.loadFromFile("images/field.png")) {
         return -1;
     }
 
@@ -15,8 +15,8 @@ int main()
     sf::Sprite backgroundSprite(backgroundTexture);
 
     // Background image size
-    float scaleX = 1.0f; // x
-    float scaleY = 1.0f; // y
+    float scaleX = 1.55f; // x
+    float scaleY = 1.5f; // y
 
     backgroundSprite.setScale(scaleX, scaleY);
 
