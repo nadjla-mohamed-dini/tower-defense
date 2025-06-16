@@ -5,6 +5,9 @@
 #include "GameState.hpp"
 #include "HUD.hpp"
 #include <iostream>
+  
+//condition de victoire et défaite à faire ici
+
 
 int main() {
     sf::RenderWindow fenetre(sf::VideoMode({1200, 600}), "Menu du jeu");
@@ -112,6 +115,14 @@ int main() {
         if (currentScreen == Screen::Menu) {
             fenetre.draw(backgroundSprite);
             menu.dessiner(fenetre);
+        }
+        if (gameState.getEnemiesRemaining() == 0) {
+            std::cout << "Victory !" << std::endl;
+            currentScreen = Screen::Menu;
+        }
+        if (gameState.hasEnemyReachedWall()) {
+            std::cout << "Game Over !" << std::endl;
+            currentScreen = Screen::Menu;
         }
         else if (currentScreen == Screen::Map) {
             fenetre.draw(mapSprite);
