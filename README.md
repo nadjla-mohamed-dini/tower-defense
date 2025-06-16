@@ -1,67 +1,49 @@
-🏰Tower Defense Game
+# 🏰Tower Defense Game
 A real-time strategy game where the player must defend their base against enemy waves by strategically placing defense towers.
 
-📋 Project Description Tower Defense is a strategy game in which the player must defend an area against enemy waves. The player must strategically place their towers so they can effectively attack enemies.
+📋 **Project Description**
+Tower Defense is a strategy game in which the player must defend an area against enemy waves. The player must strategically place their towers so they can effectively attack enemies.
 
 This project implements a complete Tower Defense system with:
 
--Wave system: Automatic management of enemy waves
+**-Wave system:** Automatic management of enemy waves
 
--Resource system: Game economy with gains and expenses
+**-Resource system:** Game economy with gains and expenses
 
--Construction system: Tower placement and upgrades
+**-Construction system:** Tower placement and upgrades
 
-🎯 Main Features
+🎯 **Main Features**
 
 ⚙️ Technical Architecture
 
--MVC Model: Model-View-Controller architecture for clear separation of responsibilities
+**-MVC Model:** Model-View-Controller architecture for clear separation of responsibilities
 
--Design Patterns: Implementation of two chosen design patterns to optimize development
+**-Design Patterns:** Implementation of two chosen design patterns to optimize development
 
--UML Diagrams: Complete documentation with user and class diagrams
+**-UML Diagrams:** Complete documentation with user and class diagrams
 
-🎮 Game Mechanics
+🎮 **Game Mechanics**
 
--Complete game management: Victory and defeat system
+**-Complete game management:** Victory and defeat system
 
--Audio control: Sound management by the user
+**-Audio control:** Sound management by the user
 
--Graphical interface: Polished graphics and intuitive interface
+**-Graphical interface:** Polished graphics and intuitive interface
 
--Health system: Enemy health bars with visual feedback
+**-Health system:** Enemy health bars with visual feedback
 
--Tower evolution: Upgrade and evolution system for defense towers
+**-Tower evolution:** Upgrade and evolution system for defense towers
 
--Timing system: Game timer and wave counter
+**-Timing system:** Game timer and wave counter
 
--Score and ranking: Score management with high score leaderboard
+**-Score and ranking:** Score management with high score leaderboard
 
-🔧 Menu and Options
+**🔧 Menu and Options**
 
--Main menu: Complete welcome interface
+**-Main menu:** Complete welcome interface
 
--Game options: Sound settings and difficulty selection
+**-Game options:** Sound settings and difficulty selection
 
--Credits: Information about developers
+**-Credits: Information about developers**
 
--Exit function: Clean game exit
-
-About
-No description, website, or topics provided.
-Resources
- Readme
- Activity
-Stars
- 0 stars
-Watchers
- 0 watching
-Forks
- 0 forks
-Releases
-No releases published
-Create a new release
-Packages
-No packages published
-Publish your first package
-Footer
+**-Exit function: Clean game exit**
