@@ -80,6 +80,11 @@ public:
         return currentHealth <= 0.f;
     }
 
+    // position X du mur
+    bool hasReachedWall(float wallX) const {
+        return position.x <= wallX;
+    }
+
 
 
 

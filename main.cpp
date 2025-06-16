@@ -130,6 +130,19 @@ int main() {
     }
     else if (currentScreen == Screen::Map) {
         fenetre.draw(mapSprite);
+        
+    //New
+        if (gameState.getEnemiesRemaining() == 0) {
+            std::cout << "Victory !" << std::endl;
+            gameState.resetGame();
+            currentScreen = Screen::Menu;
+        }
+
+        if (gameState.hasEnemyReachedWall()) {
+            std::cout << "Game Over !" << std::endl;
+            gameState.resetGame();
+            currentScreen = Screen::Menu;
+        } //End of New
 
         float elapsed = gameClock.getElapsedTime().asSeconds();
         hud.updateTimer(elapsed);

@@ -10,6 +10,9 @@ private:
     int round = 1;
     int gain = 0;
 
+    int enemiesRemaining = 0;
+    bool enemyReachedWall = false;
+
     std::vector<Observer*> observers;
 public:
     void registerObserver(Observer* observer);
@@ -21,7 +24,15 @@ public:
     void addGain(int g);
     int getRound() const;
 
+//New
+    void setEnemiesRemaining(int count);
+    void defeatEnemy();
+    int getEnemiesRemaining() const;
 
+    void setEnemyReachedWall(bool reached);
+    bool hasEnemyReachedWall() const;
+
+    void resetGame();
 
 };
 #endif //GAMESTATE_HPP

@@ -41,4 +41,35 @@ int GameState::getRound() const {
 }
 
 
+//New
+void GameState::setEnemiesRemaining(int count) {
+    enemiesRemaining = count;
+}
 
+void GameState::defeatEnemy() {
+    if (enemiesRemaining > 0) {
+        enemiesRemaining--;
+    }
+}
+
+int GameState::getEnemiesRemaining() const {
+    return enemiesRemaining;
+}
+
+void GameState::setEnemyReachedWall(bool reached) {
+    enemyReachedWall = reached;
+}
+
+bool GameState::hasEnemyReachedWall() const {
+    return enemyReachedWall;
+}
+
+void GameState::resetGame() {
+    score = 0;
+    lives = 3;
+    round = 1;
+    gain = 0;
+    enemiesRemaining = 0;
+    enemyReachedWall = false;
+    notifyObservers();
+}
