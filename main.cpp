@@ -1,24 +1,25 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/System/Clock.hpp>
 #include <optional>
-#include "Menu.h"
+#include "Menu.hpp"
 #include "GameState.hpp"
 #include "HUD.hpp"
 #include <iostream>
 #include "GameScene.hpp"
 #include "ScoreScreen.hpp"
 
+
 int main() {
     sf::RenderWindow window(sf::VideoMode({1200, 600}), "Menu du jeu");
 
     sf::Font police;
-    if (!police.openFromFile("font.ttf")) {
+    if (!police.openFromFile("asset/font.ttf")) {
         std::cerr << "Error for changing the police\n";
         return EXIT_FAILURE;
     }
 
     sf::Texture backgroundTexture;
-    if (!backgroundTexture.loadFromFile("images/background_menu.jpg")) {
+    if (!backgroundTexture.loadFromFile("asset/background_menu.jpg")) {
         std::cerr << "Error for charging the background\n";
         return EXIT_FAILURE;
     }
@@ -36,7 +37,7 @@ int main() {
     backgroundSprite.setScale(scale);
 
     Menu menu(window.getSize().x, window.getSize().y, police);
-    ScoreScreen scoreScreen(police);  // <-- pas besoin de loadScores ici
+    ScoreScreen scoreScreen(police);
 
     HUD hud(police);
     sf::Clock gameClock;
@@ -49,10 +50,9 @@ int main() {
     GameScene gameScene(window, &gameState);
     gameState.registerObserver(&hud);
     gameScene.loadAssets();
-    gameScene.spawnEnemies();
 
     sf::Texture mapTexture;
-    if (!mapTexture.loadFromFile("images/field1.png")) {
+    if (!mapTexture.loadFromFile("asset/field1.png")) {
         std::cerr << "Error for charging the map\n";
         return EXIT_FAILURE;
     }
@@ -69,32 +69,35 @@ int main() {
 
 
     while (window.isOpen()) {
-        while (auto evenement = window.pollEvent()) {
-            if (evenement->is<sf::Event::Closed>()) {
+        while (auto event = window.pollEvent()) {
+            if (event->is<sf::Event::Closed>()) {
                 window.close();
             }
-            else if (evenement->is<sf::Event::KeyPressed>()) {
-                auto touch = evenement->getIf<sf::Event::KeyPressed>();
+            else if (event->is<sf::Event::KeyPressed>()) {
+                auto touch = event->getIf<sf::Event::KeyPressed>();
                 if (touch) {
                     if (currentScreen == Screen::Menu) {
                         if (touch->code == sf::Keyboard::Key::Up) {
-                            menu.monter();
+                            menu.getUp();
                         }
                         else if (touch->code == sf::Keyboard::Key::Down) {
-                            menu.descendre();
+                            menu.getDown();
                         }
                         else if (touch->code == sf::Keyboard::Key::Enter) {
-                            int choice = menu.getIndexSelectionne();
+                            int choice = menu.getIndexSelect();
                             if (choice == 0) {
                                 currentScreen = Screen::Map;
                                 gameClock.restart();
                                 deltaClock.restart();
+
+                                gameScene.spawnEnemies();
+
                             }
                             else if (choice == 2) {
                                 window.close();
                             }
                             else if (choice == 1) {
-                                if (!scoreScreen.loadScores("score.txt")) {
+                                if (!scoreScreen.loadScores("asset/score.txt")) {
                                     std::cerr << "Error for charging the score.\n";
                                 }
                                 currentScreen = Screen::Scores;
@@ -102,7 +105,7 @@ int main() {
                         }
                     }
                     else if (currentScreen == Screen::Scores) {
-                        if (scoreScreen.handleEvent(*evenement)) {
+                        if (scoreScreen.handleEvent(*event)) {
                             if (scoreScreen.shouldExit()) {
                                 currentScreen = Screen::Menu;
                             }
@@ -110,8 +113,8 @@ int main() {
                     }
                 }
             }
-            else if (evenement->is<sf::Event::MouseButtonPressed>()) {
-                auto mouseEvent = evenement->getIf<sf::Event::MouseButtonPressed>();
+            else if (event->is<sf::Event::MouseButtonPressed>()) {
+                auto mouseEvent = event->getIf<sf::Event::MouseButtonPressed>();
                 if (mouseEvent && mouseEvent->button == sf::Mouse::Button::Left) {
                     sf::Vector2i pixelPos = sf::Mouse::getPosition(window);
                     sf::Vector2f worldPos = window.mapPixelToCoords(pixelPos);
@@ -127,10 +130,16 @@ int main() {
 
         if (currentScreen == Screen::Menu) {
             window.draw(backgroundSprite);
-            menu.dessiner(window);
+            menu.draw(window);
         }
         else if (currentScreen == Screen::Map) {
             window.draw(mapSprite);
+            if (gameState.hasEnemyReachedWall()) {
+                std::cout << "Game Over !" << std::endl;
+                gameState.resetGame();
+                gameScene.reset();
+                currentScreen = Screen::Menu;
+            }
 
             float elapsed = gameClock.getElapsedTime().asSeconds();
             hud.updateTimer(elapsed);

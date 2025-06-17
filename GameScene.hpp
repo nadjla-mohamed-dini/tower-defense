@@ -18,6 +18,8 @@ public:
     void handleClick(const sf::Vector2f& position);
     void draw(sf::RenderWindow& window);
     void spawnEnemies();
+    void reset();
+    bool hasEnemyReachedWall();
 
 private:
     sf::RenderWindow& window;  // <-- RÉFÉRENCE
