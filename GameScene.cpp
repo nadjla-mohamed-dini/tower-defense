@@ -18,12 +18,12 @@ void GameScene::loadAssets() {
     towerTexture = std::make_shared<sf::Texture>();
     enemyTexture = std::make_shared<sf::Texture>();
 
-    if (!towerTexture->loadFromFile("asset/mage_yellow_stage3_1.png")) {
+    if (!towerTexture->loadFromFile("images/towers/yellow/mage_yellow_stage3_1.png")) {
         std::cerr << "Error: impossible to charged mage_yellow_stage3_1.png\n";
         // gestion d'erreur ici, par ex. return ou throw
         exit(EXIT_FAILURE);
     }
-    if (!enemyTexture->loadFromFile("asset/slime_yellow_stage1.png")) {
+    if (!enemyTexture->loadFromFile("images/mobs/blue/slime_green_stage1.png")) {
         std::cerr << "Error: impossible to charged slime.png\n";
         exit(EXIT_FAILURE);
     }

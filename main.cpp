@@ -12,13 +12,13 @@ int main() {
     sf::RenderWindow window(sf::VideoMode({1200, 600}), "Menu du jeu");
 
     sf::Font police;
-    if (!police.openFromFile("asset/font.ttf")) {
+    if (!police.openFromFile("font.ttf")) {
         std::cerr << "Error for changing the police\n";
         return EXIT_FAILURE;
     }
 
     sf::Texture backgroundTexture;
-    if (!backgroundTexture.loadFromFile("asset/background_menu.jpg")) {
+    if (!backgroundTexture.loadFromFile("images/background_menu.jpg")) {
         std::cerr << "Error for charging the background\n";
         return EXIT_FAILURE;
     }
@@ -52,7 +52,7 @@ int main() {
     gameScene.spawnEnemies();
 
     sf::Texture mapTexture;
-    if (!mapTexture.loadFromFile("asset/field1.png")) {
+    if (!mapTexture.loadFromFile("images/field1.png")) {
         std::cerr << "Error for charging the map\n";
         return EXIT_FAILURE;
     }
@@ -94,7 +94,7 @@ int main() {
                                 window.close();
                             }
                             else if (choice == 1) {
-                                if (!scoreScreen.loadScores("asset/score.txt")) {
+                                if (!scoreScreen.loadScores("score.txt")) {
                                     std::cerr << "Error for charging the score.\n";
                                 }
                                 currentScreen = Screen::Scores;
